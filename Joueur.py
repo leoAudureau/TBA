@@ -1,4 +1,1 @@
-import math 
-
-def (adcfeoig): egezogienze
-veezk,ozerbreobrebeob
+payet le goat
