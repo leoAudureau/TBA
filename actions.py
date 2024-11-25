@@ -22,7 +22,6 @@ class Actions:
         """
         Move the player in the direction specified by the parameter.
         The parameter must be a cardinal direction (N, E, S, O).
-        It can be Up and Down too (U, D).
 
         Args:
             game (Game): The game object.
