@@ -53,14 +53,6 @@ class Actions:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
-        else:
-            # Commande non reconnue
-            raise ValueError("Commande inconnue.")
-    
-        except ValueError as e:
-            print(f"Erreur: {e}. Veuillez essayer à nouveau.")
-        except Exception as e:
-            print(f"Erreur inattendue: {e}.")
 
         # Get the direction from the list of words.
         direction = list_of_words[1]
