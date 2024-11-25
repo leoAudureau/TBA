@@ -25,7 +25,7 @@ class Game:
         self.commands["help"] = help
         quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
         self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
+        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)", Actions.go, 1)
         self.commands["go"] = go
         
         # Setup rooms
@@ -43,14 +43,18 @@ class Game:
         castle = Room("Castle", "un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
         self.rooms.append(castle)
 
+        labo=Room("labo", "un labo incrr")
+        self.rooms.append(labo)
+
         # Create exits for rooms
 
-        forest.exits = {"N" : cave, "E" : None, "S" : None, "O" : None}
-        tower.exits = {"N" : cottage, "E" : None, "S" : None, "O": None}
-        cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
-        cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
-        swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
-        castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
+        forest.exits = {"N" : cave, "E" : None, "S" : None, "O" : None, "U" : labo, "D": None}
+        tower.exits = {"N" : cottage, "E" : None, "S" : None, "O": None, "U" : None, "D": None}
+        cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None, "U" : None, "D": None}
+        cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave, "U" : None, "D": None}
+        swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle, "U" : None, "D": None}
+        castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None, "U" : None, "D": None}
+        labo.exits = {"N": None, "E":None, "S" : None, "O" : None, "U": None, "D": forest}
 
         # Setup player and starting room
 
