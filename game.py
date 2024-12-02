@@ -18,7 +18,7 @@ class Game:
     
     # Setup the game
     def setup(self):
-
+      
         # Setup commands
 
         help = Command("help", " : afficher cette aide", Actions.help, 0)
@@ -30,32 +30,56 @@ class Game:
         
         # Setup rooms
 
-        forest = Room("Forest", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
-        self.rooms.append(forest)
-        tower = Room("Tower", "dans une immense tour en pierre qui s'élève au dessus des nuages.")
-        self.rooms.append(tower)
-        cave = Room("Cave", "dans une grotte profonde et sombre. Des voix semblent provenir des profondeurs.")
-        self.rooms.append(cave)
-        cottage = Room("Cottage", "dans un petit chalet pittoresque avec un toit de chaume. Une épaisse fumée verte sort de la cheminée.")
-        self.rooms.append(cottage)
-        swamp = Room("Swamp", "dans un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
-        self.rooms.append(swamp)
-        castle = Room("Castle", "dans un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
-        self.rooms.append(castle)
+        sas_de_decompression= Room("Sas de décompression", "arrivés dans la station ... , vous êtes dans le sas de décompression")
+        self.rooms.append(sas_de_decompression)
+        
+        hall1= Room("hall1", " le Hall 1, ce hall vous permettra d'entrer dans des salles importantes du vaisseau")
+        self.rooms.append(hall1)
+        
+        hall2=Room("hall2","le Hall 2, ce Haull vous permettra d'acceder au savoir...")
+        self.rooms.append(hall2)
+       
+        hall3=Room("hall3","le Hall 3, à vous la nourriture, c'est assez important dans l'espace...")
+        self.rooms.append(hall3)
+        
+        salle_commune=Room("salle_commune"," la salle commune du vaisseau, tout le monde s'y restaure et prend du bon temps ")
+        self.rooms.append(salle_commune)
+        
+        module_amarage=Room("module d'amarage","le module d'amarage, ici vous pouvez acceuilir des amis ou avoir la surprise de tomber sur des pirates de l'espaces")
+        self.rooms.append(module_amarage)
+        
+        poste_de_commandes= Room("poste de commande","le poste de commande, à vous le voyage intergalactique !")
+        self.rooms.append(poste_de_commandes)
+       
+        reserve=Room("reserve", "la réserve du vaisseau, c'est ici qu'on entrepose la nourriture")
+        self.rooms.append(reserve)
+        
+        labo2=Room("labo2","le deuxième laboratoire celui de ... , ")
+        self.rooms.append(labo2)
+        
+        labo1=Room("labo1", "le premier laboratoire du vaisseau")
+        self.rooms.append(labo1)
+
+        serre = Room("serre", "la serre")
+        self.rooms.append(serre)
+
 
         # Create exits for rooms
 
-        forest.exits = {"N" : cave, "E" : None, "S" : None, "O" : None}
-        tower.exits = {"N" : cottage, "E" : None, "S" : None, "O": None}
-        cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
-        cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
-        swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
-        castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
-
+        sas_de_decompression.exits = {"N" : hall2, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+        hall2.exits = {"N" :labo1, "E" : None, "S" : sas_de_decompression, "O" : salle_commune, "U" : None, "D" : None}
+        labo1.exits = {"N" : None, "E" : None, "S" : hall2, "O" : None,"U" : labo2, "D" : None}
+        salle_commune.exits = {"N" : None, "E" : hall2, "S" : None, "O" : hall1, "U" : None, "D" : None}
+        hall1.exits = {"N" : module_amarage, "E" : salle_commune, "S" : None, "O" : poste_de_commandes, "U" : None, "D" : hall3}
+        poste_de_commandes.exits = {"N" : None, "E" : hall1, "S" : None, "O" : None, "U" : None, "D" : None}
+        module_amarage.exits = {"N" : None, "E" : None, "S" : hall1, "O" : None, "U" : None, "D" : None}
+        labo2.exits = {"N" : None, "E" : None, "S" : None, "O": None,"U" : None, "D" : labo1}
+        hall3.exits = {"N" : None, "E" : None, "S" : reserve, "O": serre,"U" : None, "D" : labo1}
+        serre.exits = {"N" : None, "E" : hall3, "S" : None, "O": None,"U" : None, "D" : None}
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = swamp
+        self.player.current_room = sas_de_decompression
 
     # Play the game
     def play(self):
@@ -74,10 +98,7 @@ class Game:
         list_of_words = command_string.split(" ")
 
         command_word = list_of_words[0]
-       
-       #If the command is empty (enter)
-        if not command_word:
-            return
+
         # If the command is not recognized, print an error message
         if command_word not in self.commands.keys():
             print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
@@ -101,6 +122,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-PUSHHHHHHHH VSCODE

@@ -44,7 +44,7 @@ class Actions:
         False
 
         """
-        
+
         player = game.player
         l = len(list_of_words)
         # If the number of parameters is incorrect, print an error message and return False.
@@ -55,10 +55,24 @@ class Actions:
 
         # Get the direction from the list of words.
         direction = list_of_words[1]
-        # Move the player in the direction specified by the parameter.
-        player.move(direction)
-        return True
 
+        # Move the player in the direction specified by the parameter.
+        d = {
+
+            "N": "N", "nord": "N", "NORD": "N", "n": "N", 
+            "O": "O", "ouest": "O", "OUEST": "O", "o": "O", 
+            "E": "E", "est": "E", "EST": "E", "e": "E",  
+            "S": "S", "sud": "S", "SUD": "S", "s": "S",  
+            "U": "U", "haut": "U", "HAUT": "U", "h": "U", "up" : "U", "UP" : "U", 
+            "D": "D", "bas": "D", "BAS": "D", "b": "D" , "down" : "D", "DOWN" : "D"
+        }
+        if direction in d:
+            player.move(d[direction])
+        else:
+            print("vous devez renseigner une direction valide")
+        return True
+    
+    
     def quit(game, list_of_words, number_of_parameters):
         """
         Quit the game.
@@ -137,4 +151,3 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
-        
