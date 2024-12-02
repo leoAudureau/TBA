@@ -51,7 +51,6 @@ class Game:
         cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
         swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
         castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
-        labo.exits = {"N": None, "E":None, "S" : None, "O" : None}
 
         # Setup player and starting room
 
