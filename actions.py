@@ -151,13 +151,3 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
-
-  def back(self):
-        """
-        Revenir à la pièce précédente 
-        """
-        if self.previous_rooms:
-            self.current_room = self.previous_rooms.pop()
-
-        else:
-            print("\nImpossible de revenir en arrière\n")

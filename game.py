@@ -27,7 +27,8 @@ class Game:
         self.commands["quit"] = quit
         go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
         self.commands["go"] = go
-        
+        back = Command("back", " : revenir dans la salle précédente", Actions.back, 0)
+        self.back["back"] = back
         # Setup rooms
 
         sas_de_decompression= Room("Sas de décompression", "arrivés dans la station ... , vous êtes dans le sas de décompression")
