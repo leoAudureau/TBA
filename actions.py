@@ -63,8 +63,8 @@ class Actions:
             "O": "O", "ouest": "O", "OUEST": "O", "o": "O", 
             "E": "E", "est": "E", "EST": "E", "e": "E",  
             "S": "S", "sud": "S", "SUD": "S", "s": "S",  
-            "U": "U", "haut": "U", "HAUT": "U", "h": "U", "up" : "U", "UP" : "U", 
-            "D": "D", "bas": "D", "BAS": "D", "b": "D" , "down" : "D", "DOWN" : "D"
+            "U": "U", "haut": "U", "HAUT": "U", "h": "U", "up" : "U", "UP" : "U" , "u" : "U", 
+            "D": "D", "bas": "D", "BAS": "D", "b": "D" , "down" : "D", "DOWN" : "D" , "d" : "D"
         }
         if direction in d:
             player.move(d[direction])
