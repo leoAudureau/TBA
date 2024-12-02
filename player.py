@@ -23,8 +23,14 @@ class Player():
         # Set the current room to the next room.
         self.current_room = next_room
         print(self.current_room.get_long_description())
-        self.history.append(next_room.name)
-        print(self.get_history())
+        
+        if next_room.name not in self.history:
+            self.history.append(next_room.name)
+            print(self.get_history())
+        else:
+            print(self.get_history())
+        
+        
         return True
     
     def get_history(self):
