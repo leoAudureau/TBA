@@ -154,9 +154,7 @@ class Actions:
     
     
     def back(game, list_of_words, number_of_parameters):
-        """
-        Permet au joueur de revenir à la dernière salle visitée.
-        """
+        # Vérifier si le nombre d'arguments est correct
         l = len(list_of_words)
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
@@ -165,23 +163,30 @@ class Actions:
 
         player = game.player
 
-        # Vérifier si l'historique contient au moins deux éléments pour revenir en arrière.
-        if len(player.history) < 2:
+        # Vérifier si l'historique contient assez de salles pour un retour
+        if len(player.history) < 1:
             print("\nIl n'y a pas de salle précédente à laquelle revenir.\n")
             return False
 
-        # Supprimer la salle actuelle de l'historique (dernière entrée) et obtenir la salle précédente.
-        previous_room_name = player.history[-2]
+        # Récupérer la salle précédente dans l'historique (la dernière salle visitée)
+        previous_room_name = player.history[-1]  # La dernière salle dans l'historique
 
-        # Retourner à la salle précédente
+        # Rechercher l'objet Room correspondant au nom de la salle précédente
         previous_room = next((room for room in game.rooms if room.name == previous_room_name), None)
-        if previous_room:
-            player.current_room = previous_room
-            print(f"\nVous êtes revenu(e) dans {previous_room.get_long_description()}.\n")
 
-            # Afficher l'historique mis à jour
-            print(player.get_history())
-        else:
-            print("\nErreur: la salle précédente n'a pas été trouvée.\n")
+        # Vérifier si la salle précédente existe
+        if not previous_room:
+            print("\nErreur : La salle précédente est introuvable dans le jeu.\n")
+            return False
+
+        # Déplacer le joueur dans la salle précédente
+        player.current_room = previous_room
+
+        # Supprimer la salle actuelle de l'historique (avant de se déplacer)
+        player.history.pop()
+
+        # Afficher le message approprié et l'historique mis à jour
+        print(f"\nVous êtes revenu(e) dans {previous_room.get_long_description()}.\n")
+        print(player.get_history())  # Afficher l'historique mis à jour
 
         return True
