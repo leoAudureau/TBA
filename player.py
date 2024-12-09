@@ -11,7 +11,6 @@ class Player():
     
 
     def move(self, direction):
-    
         # Récupérer la salle suivante à partir des sorties de la salle actuelle.
         next_room = self.current_room.exits.get(direction)
 
@@ -20,7 +19,7 @@ class Player():
             print("\nAucune porte dans cette direction !\n")
             return False
 
-        # Ajouter la salle actuelle à l'historique (délai avant d'ajouter la nouvelle salle).
+        # Ajouter la salle actuelle à l'historique si elle n'y est pas déjà.
         if self.current_room.name not in self.history:
             self.history.append(self.current_room.name)
 
@@ -35,7 +34,7 @@ class Player():
 
         return True
 
-    
+
     def get_history(self):
         if not self.history:
             return "Vous n'avez encore visité aucune pièce."
@@ -45,3 +44,4 @@ class Player():
         for room in self.history:
             history_str += f"    - {room}\n"
         return history_str
+
