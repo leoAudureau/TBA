@@ -151,42 +151,64 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
-    
-    
-    def back(game, list_of_words, number_of_parameters):
-        # Vérifier si le nombre d'arguments est correct
-        l = len(list_of_words)
-        if l != number_of_parameters + 1:
-            command_word = list_of_words[0]
-            print(f"Commande '{command_word}' invalide. Utilisez la commande correctement.")
+
+
+
+    def moveback(self):
+        """
+        Permet au joueur de revenir à la salle précédente en utilisant l'historique.
+        """
+        if len(self.history) <= 1:  # Vérifie si l'historique contient au moins 2 éléments (salle actuelle + une salle précédente)
+            print("Point de départ atteint, pas de retour en arrière possible.")
             return False
 
-        player = game.player
+        # Retirer la salle actuelle de l'historique
+        self.history.pop()  
+        # La salle précédente devient la salle actuelle
+        previous_room_name = self.history[-1]
+        previous_room = next((room for room in self.game.rooms if room.name == previous_room_name), None)
 
-        # Vérifier si l'historique contient assez de salles pour un retour
-        if len(player.history) < 2:
-            print("\nIl n'y a pas de salle précédente à laquelle revenir.\n")
-            return False
-
-        # Récupérer le nom de la salle précédente dans l'historique et mettre à jour l'historique
-        current_room_name = player.history.pop()  # Enlever la salle actuelle de l'historique
-        previous_room_name = player.history[-1]  # Dernière salle visitée
-
-        # Rechercher l'objet Room correspondant au nom de la salle précédente
-        previous_room = next((room for room in game.rooms if room.name == previous_room_name), None)
-
-        # Vérifier si la salle précédente existe
         if not previous_room:
-            print("\nErreur : La salle précédente est introuvable dans le jeu.\n")
+            print("Erreur : la salle précédente n'existe pas.")
             return False
 
-        # Déplacer le joueur dans la salle précédente
-        player.current_room = previous_room
+        self.current_room = previous_room
 
-        # Afficher le message approprié et l'historique mis à jour
-        print(f"\n {previous_room.get_long_description()}.\n")
-        print(player.get_history())  # Afficher l'historique mis à jour
+        # Afficher les informations sur la salle précédente
+        print(f"\nVous êtes revenu sur vos pas. Vous êtes dans : {self.current_room.name}")
+        print(self.current_room.get_long_description())
+        print("Historique des salles visitées :", self.history)
 
         return True
 
-        
+
+
+        def back(game, list_of_words, number_of_parameters):
+            """
+            Commande pour revenir à la salle précédente dans le jeu.
+
+            Args:
+                game (Game): L'objet du jeu.
+                list_of_words (list): La liste des mots dans la commande.
+                number_of_parameters (int): Le nombre de paramètres attendu par la commande.
+
+            Returns:
+                bool: True si le retour en arrière a été effectué, False sinon.
+            """
+            player = game.player
+            l = len(list_of_words)
+
+            # Vérifier le nombre correct de paramètres
+            if l != number_of_parameters + 1:
+                command_word = list_of_words[0]
+                print(MSG0.format(command_word=command_word))
+                return False
+
+            # Tenter de revenir en arrière avec la méthode moveback
+            success = player.moveback()
+
+            if not success:
+                print("Impossible de revenir en arrière.")
+                return False
+
+            return True
