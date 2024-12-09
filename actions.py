@@ -161,7 +161,11 @@ class Actions:
             print(f"Commande '{command_word}' invalide. Utilisez la commande correctement.")
             return False
 
-        player = game.player
+        # Retirer la salle actuelle de l'historique
+        self.history.pop()  
+        # La salle précédente devient la salle actuelle
+        previous_room_name = self.history[-1]
+        previous_room = next((room for room in self.game.rooms if room.name == previous_room_name), None)
 
         # Vérifier si l'historique contient assez de salles pour un retour
         if len(player.history) < 1:
@@ -190,3 +194,35 @@ class Actions:
         print(player.get_history())  # Afficher l'historique mis à jour
 
         return True
+
+
+
+        def back(game, list_of_words, number_of_parameters):
+            """
+            Commande pour revenir à la salle précédente dans le jeu.
+
+            Args:
+                game (Game): L'objet du jeu.
+                list_of_words (list): La liste des mots dans la commande.
+                number_of_parameters (int): Le nombre de paramètres attendu par la commande.
+
+            Returns:
+                bool: True si le retour en arrière a été effectué, False sinon.
+            """
+            player = game.player
+            l = len(list_of_words)
+
+            # Vérifier le nombre correct de paramètres
+            if l != number_of_parameters + 1:
+                command_word = list_of_words[0]
+                print(MSG0.format(command_word=command_word))
+                return False
+
+            # Tenter de revenir en arrière avec la méthode moveback
+            success = player.moveback()
+
+            if not success:
+                print("Impossible de revenir en arrière.")
+                return False
+
+            return True
