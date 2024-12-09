@@ -63,8 +63,8 @@ class Actions:
             "O": "O", "ouest": "O", "OUEST": "O", "o": "O", 
             "E": "E", "est": "E", "EST": "E", "e": "E",  
             "S": "S", "sud": "S", "SUD": "S", "s": "S",  
-            "U": "U", "haut": "U", "HAUT": "U", "h": "U", "up" : "U", "UP" : "U" , "u" : "U", 
-            "D": "D", "bas": "D", "BAS": "D", "b": "D" , "down" : "D", "DOWN" : "D" , "d" : "D"
+            "U": "U", "haut": "U", "HAUT": "U", "h": "U", "up" : "U", "UP" : "U", 
+            "D": "D", "bas": "D", "BAS": "D", "b": "D" , "down" : "D", "DOWN" : "D"
         }
         if direction in d:
             player.move(d[direction])
@@ -151,13 +151,33 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
-
-  def back(self):
+    
+    def back(game, list_of_words, number_of_parameters):
         """
-        Revenir à la pièce précédente 
+        Retourner à la salle précédente si possible.
         """
-        if self.previous_rooms:
-            self.current_room = self.previous_rooms.pop()
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(f"\nCommande '{command_word}' invalide. Utilisez la commande correctement.\n")
+            return False
 
+        player = game.player
+
+        if len(player.history) < 1:
+            print("\nIl n'y a pas de salle précédente à laquelle revenir.\n")
+            return False
+
+        # Obtenir le nom de la salle précédente et la retirer de l'historique
+        previous_room_name = player.history.pop()
+
+        # Trouver la salle précédente
+        previous_room = next((room for room in game.rooms if room.name == previous_room_name), None)
+
+        if previous_room:
+            player.current_room = previous_room
+            print(f"\nVous êtes revenu dans : {player.current_room.get_long_description()}")
+            return True
         else:
-            print("\nImpossible de revenir en arrière\n")
+            print("\nErreur : impossible de revenir à la salle précédente.\n")
+            return False
