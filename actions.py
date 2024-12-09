@@ -1,183 +1,47 @@
-# Description: The actions module.
+# Define the Player class.
+class Player():
 
-# The actions module contains the functions that are called when a command is executed.
-# Each function takes 3 parameters:
-# - game: the game object
-# - list_of_words: the list of words in the command
-# - number_of_parameters: the number of parameters expected by the command
-# The functions return True if the command was executed successfully, False otherwise.
-# The functions print an error message if the number of parameters is incorrect.
-# The error message is different depending on the number of parameters expected by the command.
+    # Define the constructor.
+    def __init__(self, name):
+        self.name = name
+        self.current_room = None
+        self.history= []
+    
+    # Define the move method.
+    
 
+    def move(self, direction):
+    
+        # Récupérer la salle suivante à partir des sorties de la salle actuelle.
+        next_room = self.current_room.exits.get(direction)
 
-# The error message is stored in the MSG0 and MSG1 variables and formatted with the command_word variable, the first word in the command.
-# The MSG0 variable is used when the command does not take any parameter.
-MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
-# The MSG1 variable is used when the command takes 1 parameter.
-MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
-
-class Actions:
-
-    def go(game, list_of_words, number_of_parameters):
-        """
-        Move the player in the direction specified by the parameter.
-        The parameter must be a cardinal direction (N, E, S, O).
-
-        Args:
-            game (Game): The game object.
-            list_of_words (list): The list of words in the command.
-            number_of_parameters (int): The number of parameters expected by the command.
-
-        Returns:
-            bool: True if the command was executed successfully, False otherwise.
-
-        Examples:
-        
-        >>> from game import Game
-        >>> game = Game()
-        >>> game.setup()
-        >>> go(game, ["go", "N"], 1)
-        True
-        >>> go(game, ["go", "N", "E"], 1)
-        False
-        >>> go(game, ["go"], 1)
-        False
-
-        """
-
-        player = game.player
-        l = len(list_of_words)
-        # If the number of parameters is incorrect, print an error message and return False.
-        if l != number_of_parameters + 1:
-            command_word = list_of_words[0]
-            print(MSG1.format(command_word=command_word))
+        # Si aucune salle n'est trouvée dans cette direction, afficher un message d'erreur et retourner False.
+        if next_room is None:
+            print("\nAucune porte dans cette direction !\n")
             return False
 
-        # Get the direction from the list of words.
-        direction = list_of_words[1]
+        # Ajouter la salle actuelle à l'historique (délai avant d'ajouter la nouvelle salle).
+        if self.current_room.name not in self.history:
+            self.history.append(self.current_room.name)
 
-        # Move the player in the direction specified by the parameter.
-        d = {
+        # Déplacer le joueur dans la salle suivante.
+        self.current_room = next_room
 
-            "N": "N", "nord": "N", "NORD": "N", "n": "N", 
-            "O": "O", "ouest": "O", "OUEST": "O", "o": "O", 
-            "E": "E", "est": "E", "EST": "E", "e": "E",  
-            "S": "S", "sud": "S", "SUD": "S", "s": "S",  
-            "U": "U", "haut": "U", "HAUT": "U", "h": "U", "up" : "U", "UP" : "U", 
-            "D": "D", "bas": "D", "BAS": "D", "b": "D" , "down" : "D", "DOWN" : "D"
-        }
-        if direction in d:
-            player.move(d[direction])
-        else:
-            print("vous devez renseigner une direction valide")
-        return True
-    
-    
-    def quit(game, list_of_words, number_of_parameters):
-        """
-        Quit the game.
+        # Afficher la description complète de la nouvelle salle.
+        print(self.current_room.get_long_description())
 
-        Args:
-            game (Game): The game object.
-            list_of_words (list): The list of words in the command.
-            number_of_parameters (int): The number of parameters expected by the command.
+        # Afficher l'historique après la mise à jour.
+        print(self.get_history())
 
-        Returns:
-            bool: True if the command was executed successfully, False otherwise.
-
-        Examples:
-
-        >>> from game import Game
-        >>> game = Game()
-        >>> game.setup()
-        >>> quit(game, ["quit"], 0)
-        True
-        >>> quit(game, ["quit", "N"], 0)
-        False
-        >>> quit(game, ["quit", "N", "E"], 0)
-        False
-
-        """
-        l = len(list_of_words)
-        # If the number of parameters is incorrect, print an error message and return False.
-        if l != number_of_parameters + 1:
-            command_word = list_of_words[0]
-            print(MSG0.format(command_word=command_word))
-            return False
-        
-        # Set the finished attribute of the game object to True.
-        player = game.player
-        msg = f"\nMerci {player.name} d'avoir joué. Au revoir.\n"
-        print(msg)
-        game.finished = True
         return True
 
-    def help(game, list_of_words, number_of_parameters):
-        """
-        Print the list of available commands.
-        
-        Args:
-            game (Game): The game object.
-            list_of_words (list): The list of words in the command.
-            number_of_parameters (int): The number of parameters expected by the command.
-
-        Returns:
-            bool: True if the command was executed successfully, False otherwise.
-
-        Examples:
-
-        >>> from game import Game
-        >>> game = Game()
-        >>> game.setup()
-        >>> help(game, ["help"], 0)
-        True
-        >>> help(game, ["help", "N"], 0)
-        False
-        >>> help(game, ["help", "N", "E"], 0)
-        False
-
-        """
-
-        # If the number of parameters is incorrect, print an error message and return False.
-        l = len(list_of_words)
-        if l != number_of_parameters + 1:
-            command_word = list_of_words[0]
-            print(MSG0.format(command_word=command_word))
-            return False
-        
-        # Print the list of available commands.
-        print("\nVoici les commandes disponibles:")
-        for command in game.commands.values():
-            print("\t- " + str(command))
-        print()
-        return True
     
-    def back(game, list_of_words, number_of_parameters):
-        """
-        Retourner à la salle précédente si possible.
-        """
-        l = len(list_of_words)
-        if l != number_of_parameters + 1:
-            command_word = list_of_words[0]
-            print(f"\nCommande '{command_word}' invalide. Utilisez la commande correctement.\n")
-            return False
-
-        player = game.player
-
-        if len(player.history) < 1:
-            print("\nIl n'y a pas de salle précédente à laquelle revenir.\n")
-            return False
-
-        # Obtenir le nom de la salle précédente et la retirer de l'historique
-        previous_room_name = player.history.pop()
-
-        # Trouver la salle précédente
-        previous_room = next((room for room in game.rooms if room.name == previous_room_name), None)
-
-        if previous_room:
-            player.current_room = previous_room
-            print(f"\nVous êtes revenu dans : {player.current_room.get_long_description()}")
-            return True
-        else:
-            print("\nErreur : impossible de revenir à la salle précédente.\n")
-            return False
+    def get_history(self):
+        if not self.history:
+            return "Vous n'avez encore visité aucune pièce."
+        
+        # Construction de la chaîne d'affichage des pièces visitées
+        history_str = "Vous avez déjà visité les pièces suivantes:\n"
+        for room in self.history:
+            history_str += f"    - {room}\n"
+        return history_str
