@@ -6,6 +6,7 @@ from room import Room
 from player import Player
 from command import Command
 from actions import Actions
+from item import Item
 
 class Game:
 
@@ -29,6 +30,8 @@ class Game:
         self.commands["go"] = go
         back = Command("back", " : revenir dans la salle précédente", Actions.back, 0)
         self.commands["back"] = back
+        look = Command("look", " : examiner la salle actuelle et voir les objets présents", Actions.look, 0)
+        self.commands["look"] = look
         
         # Setup rooms
 
@@ -83,6 +86,10 @@ class Game:
 
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = sas_de_decompression
+
+        #create items in rooms 
+        eau = Item("de l'eau", "a boire", 1)
+        hall2.add_item(eau)
 
     # Play the game
     def play(self):

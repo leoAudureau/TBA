@@ -6,9 +6,7 @@ class Player():
         self.name = name
         self.current_room = None
         self.history= []
-    
-    # Define the move method.
-    
+        self.inventory={}
 
     def move(self, direction):
         # Récupérer la salle suivante à partir des sorties de la salle actuelle.
@@ -45,3 +43,39 @@ class Player():
             history_str += f"    - {room}\n"
         return history_str
 
+    def get_inventory(self):
+        """
+        Retourne une chaîne de caractères décrivant le contenu de l'inventaire.
+        """
+        if not self.inventory:
+            return "Votre inventaire est vide."
+        
+        inventory_str = "Vous disposez des items suivants :\n"
+        for name, item in self.inventory.items():
+            inventory_str += f"    - {name} : {item.description} ({item.weight} kg)\n"
+        return inventory_str
+    
+    def add_item_to_inventory(self, item):
+
+        """
+        Ajoute un item à l'inventaire du joueur.
+            
+        :param item: Item, l'objet à ajouter
+        """
+        if item.name in self.inventory:
+            print(f"L'objet '{item.name}' est déjà dans votre inventaire.")
+        else:
+            self.inventory[item.name] = item
+            print(f"'{item.name}' a été ajouté à votre inventaire.")
+
+    def remove_item_from_inventory(self, item_name):
+        """
+        Supprime un item de l'inventaire du joueur.
+        
+        :param item_name: str, le nom de l'objet à supprimer
+        """
+        if item_name in self.inventory:
+            del self.inventory[item_name]
+            print(f"'{item_name}' a été retiré de votre inventaire.")
+        else:
+            print(f"L'objet '{item_name}' n'est pas dans votre inventaire.")
