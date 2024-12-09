@@ -78,6 +78,7 @@ class Game:
         labo2.exits = {"N" : None, "E" : None, "S" : None, "O": None,"U" : None, "D" : labo1}
         hall3.exits = {"N" : None, "E" : None, "S" : reserve, "O": serre,"U" : None, "D" : labo1}
         serre.exits = {"N" : None, "E" : hall3, "S" : None, "O": None,"U" : None, "D" : None}
+        reserve.exits = {"N" : hall3, "E" : None, "S" : None, "O": None,"U" : None, "D" : None}
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
