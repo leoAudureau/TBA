@@ -154,7 +154,9 @@ class Actions:
     
     
     def back(game, list_of_words, number_of_parameters):
-        # Vérifier si le nombre d'arguments est correct
+        """
+        Permet au joueur de revenir à la dernière salle visitée.
+        """
         l = len(list_of_words)
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
@@ -163,29 +165,23 @@ class Actions:
 
         player = game.player
 
-        # Vérifier si l'historique contient assez de salles pour un retour
+        # Vérifier si l'historique contient au moins deux éléments pour revenir en arrière.
         if len(player.history) < 2:
             print("\nIl n'y a pas de salle précédente à laquelle revenir.\n")
             return False
 
-        # Récupérer le nom de la salle précédente dans l'historique et mettre à jour l'historique
-        current_room_name = player.history.pop()  # Enlever la salle actuelle de l'historique
-        previous_room_name = player.history[-1]  # Dernière salle visitée
+        # Supprimer la salle actuelle de l'historique (dernière entrée) et obtenir la salle précédente.
+        previous_room_name = player.history[-2]
 
-        # Rechercher l'objet Room correspondant au nom de la salle précédente
+        # Retourner à la salle précédente
         previous_room = next((room for room in game.rooms if room.name == previous_room_name), None)
+        if previous_room:
+            player.current_room = previous_room
+            print(f"\nVous êtes revenu(e) dans {previous_room.get_long_description()}.\n")
 
-        # Vérifier si la salle précédente existe
-        if not previous_room:
-            print("\nErreur : La salle précédente est introuvable dans le jeu.\n")
-            return False
-
-        # Déplacer le joueur dans la salle précédente
-        player.current_room = previous_room
-
-        # Afficher le message approprié et l'historique mis à jour
-        print(f"\n {previous_room.get_long_description()}.\n")
-        print(player.get_history())  # Afficher l'historique mis à jour
+            # Afficher l'historique mis à jour
+            print(player.get_history())
+        else:
+            print("\nErreur: la salle précédente n'a pas été trouvée.\n")
 
         return True
-
