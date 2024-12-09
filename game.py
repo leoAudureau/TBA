@@ -28,7 +28,8 @@ class Game:
         go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
         self.commands["go"] = go
         back = Command("back", " : revenir dans la salle précédente", Actions.back, 0)
-        self.back["back"] = back
+        self.commands["back"] = back
+        
         # Setup rooms
 
         sas_de_decompression= Room("Sas de décompression", "arrivés dans la station ... , vous êtes dans le sas de décompression")
@@ -75,9 +76,8 @@ class Game:
         poste_de_commandes.exits = {"N" : None, "E" : hall1, "S" : None, "O" : None, "U" : None, "D" : None}
         module_amarage.exits = {"N" : None, "E" : None, "S" : hall1, "O" : None, "U" : None, "D" : None}
         labo2.exits = {"N" : None, "E" : None, "S" : None, "O": None,"U" : None, "D" : labo1}
-        hall3.exits = {"N" : None, "E" : None, "S" : reserve, "O": serre,"U" : hall1, "D" : None}
+        hall3.exits = {"N" : None, "E" : None, "S" : reserve, "O": serre,"U" : None, "D" : labo1}
         serre.exits = {"N" : None, "E" : hall3, "S" : None, "O": None,"U" : None, "D" : None}
-        reserve.exits = {"N" : hall3, "E" : None, "S" : None, "O": None,"U" : None, "D" : None}
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
