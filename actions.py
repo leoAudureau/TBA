@@ -205,10 +205,8 @@ class Actions:
             print("Il n'y a aucun objet ici.")
 
     def take(game, list_of_words, number_of_parameters):
-        # Récupère la pièce actuelle
         current_room = game.player.current_room
 
-        # Vérifie qu'il y a bien un deuxième mot dans la commande
         if len(list_of_words) < 2:
             print("Vous devez spécifier quel objet prendre.")
             return
@@ -224,9 +222,7 @@ class Actions:
         # Recherche l'objet dans l'inventaire de la pièce
         for item in current_room.inventory:
             if item.name == item_name:
-                # Retire l'objet de la pièce
                 current_room.inventory.remove(item)
-                # Ajoute l'objet à l'inventaire du joueur
                 game.player.inventory[item.name] = item
                 print(f"Vous avez pris {item.name}.")
                 return
@@ -235,7 +231,38 @@ class Actions:
         print(f"L'objet '{item_name}' n'est pas présent dans cette pièce.")
     
 
-        
+
+    def drop(game, list_of_words, number_of_parameters):
+        current_room = game.player.current_room
+        player = game.player
+
+        # Vérifie si le nombre de paramètres est correct
+        if len(list_of_words) != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+
+        # Récupère le nom de l'objet à déposer
+        item_name = list_of_words[1]
+
+        # Vérifie si le joueur a des objets dans son inventaire
+        if not player.inventory:
+            print("Votre inventaire est vide, vous ne pouvez rien déposer.")
+            return False
+
+        # Recherche l'objet dans l'inventaire du joueur
+        if item_name in player.inventory:
+            # Récupère l'objet à déposer
+            item = player.inventory.pop(item_name)  # Retire l'objet de l'inventaire du joueur
+            
+            # Ajoute l'objet à l'inventaire de la pièce
+            current_room.inventory.add(item)
+
+            print(f"Vous avez déposé {item.name} dans la pièce.")
+            return True
+        else:
+            print(f"L'objet '{item_name}' n'est pas dans votre inventaire.")
+            return False
 
     def drop(game, list_of_words, number_of_parameters):
         # Récupérer la pièce actuelle
