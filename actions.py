@@ -229,37 +229,40 @@ class Actions:
 
         # Si l'objet n'est pas trouvé
         print(f"L'objet '{item_name}' n'est pas présent dans cette pièce.")
+    
 
 
     def drop(game, list_of_words, number_of_parameters):
-            current_room = game.player.current_room
-            player = game.player
+        current_room = game.player.current_room
+        player = game.player
 
-            if len(list_of_words) < 2:
-                print("Vous devez spécifier quel objet vous voulez déposer.")
-                return
+        # Vérifie si le nombre de paramètres est correct
+        if len(list_of_words) != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
 
-            item_name = list_of_words[1]
+        # Récupère le nom de l'objet à déposer
+        item_name = list_of_words[1]
 
-            # Vérifie si l'inventaire du joueur est vide
-            if not player.inventory:
-                print("Vous n'avez pas d'objets à déposer.")
-                return
+        # Vérifie si le joueur a des objets dans son inventaire
+        if not player.inventory:
+            print("Votre inventaire est vide, vous ne pouvez rien déposer.")
+            return False
 
-            # Recherche l'objet dans l'inventaire
-            print(player.inventory)
-            for item_string, item_value in player.inventory.items():
+        # Recherche l'objet dans l'inventaire du joueur
+        if item_name in player.inventory:
+            # Récupère l'objet à déposer
+            item = player.inventory.pop(item_name)  # Retire l'objet de l'inventaire du joueur
+            
+            # Ajoute l'objet à l'inventaire de la pièce
+            current_room.inventory.add(item)
 
-                if item_string == item_name:
-                    game.player.inventory.remove(item)
-                    current_room.inventory[item.name] = item
-                    print(f"Vous avez déposé(e) {item.name}.")
-                    return
-                    
-            # Si l'objet n'est pas trouvé
-            print(f"Vous ne disposez pas de l'objet : '{item_name}'.") 
-
-
+            print(f"Vous avez déposé {item.name} dans la pièce.")
+            return True
+        else:
+            print(f"L'objet '{item_name}' n'est pas dans votre inventaire.")
+            return False
 
     def check(game, list_of_words, number_of_parameters):
         player = game.player
