@@ -86,10 +86,9 @@ class Game:
 
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = sas_de_decompression
-
-        #create items in rooms 
-        eau = Item("de l'eau", "a boire", 1)
-        hall2.add_item(eau)
+       
+        
+        hall2.inventory = {Item("de l'eau", "a boire", 1)}
 
     # Play the game
     def play(self):
