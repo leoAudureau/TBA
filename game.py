@@ -34,7 +34,9 @@ class Game:
         self.commands["look"] = look
         take = Command("take", " prendre l'objet voulu", Actions.take,1)
         self.commands["take"] = take
-        
+        check = Command("check", "regarder l'inventaire du joueur", Actions.check,0)
+        self.commands["check"] = check
+         
         # Setup rooms
 
         sas_de_decompression= Room("Sas de décompression", "arrivés dans la station ... , vous êtes dans le sas de décompression")
