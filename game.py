@@ -38,6 +38,8 @@ class Game:
         self.commands["drop"] = drop
         check = Command("check", " regarder inventaire", Actions.check,0)
         self.commands["check"] = check
+        drop=Command("drop", "permet de jeter un item de l'inventaire", Actions.drop, 1)
+        self.commands["drop"]= drop
         
         # Setup rooms
 
