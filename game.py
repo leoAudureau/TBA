@@ -32,6 +32,8 @@ class Game:
         self.commands["back"] = back
         look = Command("look", " : examiner la salle actuelle et voir les objets présents", Actions.look, 0)
         self.commands["look"] = look
+        take = Command("take", " prendre l'objet voulu", Actions.take,1)
+        self.commands["take"] = take
         
         # Setup rooms
 
@@ -88,7 +90,7 @@ class Game:
         self.player.current_room = sas_de_decompression
        
         
-        hall2.inventory = {Item("de l'eau", "a boire", 1)}
+        hall2.inventory = {Item("eau", "a boire", 1)}
 
     # Play the game
     def play(self):
