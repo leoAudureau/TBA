@@ -191,7 +191,7 @@ class Actions:
 
         return True
 
-    def look (game,list_of_words, number_of_parameters):
+    def look(game,list_of_words, number_of_parameters):
         current_room = game.player.current_room
         print(current_room.get_long_description())
 
