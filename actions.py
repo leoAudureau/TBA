@@ -191,7 +191,7 @@ class Actions:
 
         return True
 
-    def look(game, list_of_words, number_of_parameters):
+    def look (game,list_of_words, number_of_parameters):
         current_room = game.player.current_room
         print(current_room.get_long_description())
 
@@ -235,4 +235,16 @@ class Actions:
 
         
 
-
+    def check(game, list_of_words, number_of_parameters):
+        player = game.player
+        
+        if player.inventory:
+            print("Vous avez actuellement :")
+            
+            for item in player.inventory:
+                if isinstance(item, str):  # Si l'élément est une chaîne
+                    print(f"    - {item}")
+                else:  # Si l'élément est un objet avec des attributs
+                    print(f"    - {item.name} : {item.description} ({item.weight} kg)")
+        else:
+            print("Votre inventaire est vide")
