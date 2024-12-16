@@ -236,26 +236,25 @@ class Actions:
         current_room = game.player.current_room
         player = game.player
 
-        # Vérifie si le nombre de paramètres est correct
+        # nb de paramètres correct ?
         if len(list_of_words) != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
 
-        # Récupère le nom de l'objet à déposer
+        # nom objet à déposer
         item_name = list_of_words[1]
 
-        # Vérifie si le joueur a des objets dans son inventaire
+        # le joueur a des objets dans son inventaire ?
         if not player.inventory:
             print("Votre inventaire est vide, vous ne pouvez rien déposer.")
             return False
 
-        # Recherche l'objet dans l'inventaire du joueur
+        # recherche l'objet dans l'inventaire du joueur
         if item_name in player.inventory:
-            # Récupère l'objet à déposer
-            item = player.inventory.pop(item_name)  # Retire l'objet de l'inventaire du joueur
+            item = player.inventory.pop(item_name)
             
-            # Ajoute l'objet à l'inventaire de la pièce
+            # remet l'objet dans l'inventaire de la pièce
             current_room.inventory.add(item)
 
             print(f"Vous avez déposé {item.name} dans la pièce.")
@@ -271,7 +270,7 @@ class Actions:
             print("Vous avez actuellement :")
             
             for item in player.inventory:
-                if isinstance(item, str):  # Si l'élément est une chaîne
+                if isinstance(item, str):  # si c'est une chaîne
                     print(f"    - {item}")
                 else:  # Si l'élément est un objet avec des attributs
                     print(f"    - {item.name} : {item.description} ({item.weight} kg)")
