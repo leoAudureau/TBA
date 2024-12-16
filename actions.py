@@ -198,8 +198,52 @@ class Actions:
         if current_room.inventory:
             print("Les objets présents dans cette pièce sont :")
             for item in current_room.inventory:
-                # Debug : affiche le type de chaque item
                 print(f"    - {item.name} : {item.description} ({item.weight} kg)")
         else:
             print("Il n'y a aucun objet ici.")
 
+    def take(game, list_of_words, number_of_parameters):
+        # Récupère la pièce actuelle
+        current_room = game.player.current_room
+
+        # Vérifie qu'il y a bien un deuxième mot dans la commande
+        if len(list_of_words) < 2:
+            print("Vous devez spécifier quel objet prendre.")
+            return
+
+        # Récupère le nom de l'objet que le joueur souhaite prendre
+        item_name = list_of_words[1]
+
+        # Vérifie si l'inventaire de la pièce est vide
+        if not current_room.inventory:
+            print("Il n'y a pas d'objet à prendre ici.")
+            return
+
+        # Recherche l'objet dans l'inventaire de la pièce
+        for item in current_room.inventory:
+            if item.name == item_name:
+                # Retire l'objet de la pièce
+                current_room.inventory.remove(item)
+                # Ajoute l'objet à l'inventaire du joueur
+                game.player.inventory[item.name] = item
+                print(f"Vous avez pris {item.name}.")
+                return
+
+        # Si l'objet n'est pas trouvé
+        print(f"L'objet '{item_name}' n'est pas présent dans cette pièce.")
+
+        
+
+    def check(game, list_of_words, number_of_parameters):
+        player = game.player
+        
+        if player.inventory:
+            print("Vous avez actuellement :")
+            
+            for item in player.inventory:
+                if isinstance(item, str):  # Si l'élément est une chaîne
+                    print(f"    - {item}")
+                else:  # Si l'élément est un objet avec des attributs
+                    print(f"    - {item.name} : {item.description} ({item.weight} kg)")
+        else:
+            print("Votre inventaire est vide")
