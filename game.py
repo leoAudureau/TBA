@@ -1,6 +1,8 @@
 # Description: Game class
 
+
 # Import modules
+
 
 from room import Room
 from player import Player
@@ -8,7 +10,9 @@ from command import Command
 from actions import Actions
 from item import Item
 
+
 class Game:
+
 
     # Constructor
     def __init__(self):
@@ -16,11 +20,12 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
-    
+   
     # Setup the game
     def setup(self):
-      
+     
         # Setup commands
+
 
         help = Command("help", " : afficher cette aide", Actions.help, 0)
         self.commands["help"] = help
@@ -38,46 +43,49 @@ class Game:
         self.commands["drop"] = drop
         check = Command("check", " regarder inventaire", Actions.check,0)
         self.commands["check"] = check
-        drop=Command("drop", "permet de jeter un item de l'inventaire", Actions.drop, 1)
-        self.commands["drop"]= drop
-        
+       
         # Setup rooms
+
 
         sas_de_decompression= Room("Sas de décompression", "arrivés dans la station ... , vous êtes dans le sas de décompression")
         self.rooms.append(sas_de_decompression)
-        
+       
         hall1= Room("hall1", " le Hall 1, ce hall vous permettra d'entrer dans des salles importantes du vaisseau")
         self.rooms.append(hall1)
-        
+       
         hall2=Room("hall2","le Hall 2, ce Haull vous permettra d'acceder au savoir...")
         self.rooms.append(hall2)
        
         hall3=Room("hall3","le Hall 3, à vous la nourriture, c'est assez important dans l'espace...")
         self.rooms.append(hall3)
-        
+       
         salle_commune=Room("salle_commune"," la salle commune du vaisseau, tout le monde s'y restaure et prend du bon temps ")
         self.rooms.append(salle_commune)
-        
+       
         module_amarage=Room("module d'amarage","le module d'amarage, ici vous pouvez acceuilir des amis ou avoir la surprise de tomber sur des pirates de l'espaces")
         self.rooms.append(module_amarage)
-        
+       
         poste_de_commandes= Room("poste de commande","le poste de commande, à vous le voyage intergalactique !")
         self.rooms.append(poste_de_commandes)
        
         reserve=Room("reserve", "la réserve du vaisseau, c'est ici qu'on entrepose la nourriture")
         self.rooms.append(reserve)
-        
+       
         labo2=Room("labo2","le deuxième laboratoire celui de ... , ")
         self.rooms.append(labo2)
-        
+       
         labo1=Room("labo1", "le premier laboratoire du vaisseau")
         self.rooms.append(labo1)
+
 
         serre = Room("serre", "la serre")
         self.rooms.append(serre)
 
 
+
+
         # Create exits for rooms
+
 
         sas_de_decompression.exits = {"N" : hall2, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
         hall2.exits = {"N" :labo1, "E" : None, "S" : sas_de_decompression, "O" : salle_commune, "U" : None, "D" : None}
@@ -92,11 +100,13 @@ class Game:
         reserve.exits = {"N" : hall3, "E" : None, "S" : None, "O": None,"U" : None, "D" : None}
         # Setup player and starting room
 
+
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = sas_de_decompression
        
-        
+       
         hall2.inventory = {Item("eau", "a boire", 1)}
+
 
     # Play the game
     def play(self):
@@ -108,13 +118,17 @@ class Game:
             self.process_command(input("> "))
         return None
 
+
     # Process the command entered by the player
     def process_command(self, command_string) -> None:
+
 
         # Split the command string into a list of words
         list_of_words = command_string.split(" ")
 
+
         command_word = list_of_words[0]
+
 
         # If the command is not recognized, print an error message
         if command_word not in self.commands.keys():
@@ -124,18 +138,21 @@ class Game:
             command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)
 
+
     # Print the welcome message
     def print_welcome(self):
         print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure !")
         print("Entrez 'help' si vous avez besoin d'aide.")
         #
         print(self.player.current_room.get_long_description())
-    
+   
+
 
 def main():
     # Create a game object and play the game
     Game().play()
-    
+   
+
 
 if __name__ == "__main__":
     main()
