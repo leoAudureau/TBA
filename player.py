@@ -55,27 +55,3 @@ class Player():
             inventory_str += f"    - {name} : {item.description} ({item.weight} kg)\n"
         return inventory_str
     
-    def add_item_to_inventory(self, item):
-
-        """
-        Ajoute un item à l'inventaire du joueur.
-            
-        :param item: Item, l'objet à ajouter
-        """
-        if item.name in self.inventory:
-            print(f"L'objet '{item.name}' est déjà dans votre inventaire.")
-        else:
-            self.inventory[item.name] = item
-            print(f"'{item.name}' a été ajouté à votre inventaire.")
-
-    def remove_item_from_inventory(self, item_name):
-        """
-        Supprime un item de l'inventaire du joueur.
-        
-        :param item_name: str, le nom de l'objet à supprimer
-        """
-        if item_name in self.inventory:
-            del self.inventory[item_name]
-            print(f"'{item_name}' a été retiré de votre inventaire.")
-        else:
-            print(f"L'objet '{item_name}' n'est pas dans votre inventaire.")

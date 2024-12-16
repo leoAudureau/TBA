@@ -16,6 +16,8 @@ MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 # The MSG1 variable is used when the command takes 1 parameter.
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
+from item import Item
+
 class Actions:
 
     def go(game, list_of_words, number_of_parameters):
@@ -235,16 +237,33 @@ class Actions:
 
         
 
-    def check(game, list_of_words, number_of_parameters):
-        player = game.player
+    def drop(game, list_of_words, number_of_parameters):
+        # Récupérer la pièce actuelle
+        current_room = game.player.current_room
         
-        if player.inventory:
-            print("Vous avez actuellement :")
-            
-            for item in player.inventory:
-                if isinstance(item, str):  # Si l'élément est une chaîne
-                    print(f"    - {item}")
-                else:  # Si l'élément est un objet avec des attributs
-                    print(f"    - {item.name} : {item.description} ({item.weight} kg)")
+        if not game.player.inventory:
+            print("Votre inventaire est vide.")
+            return
+        
+        if len(list_of_words) < 2:
+            print("Vous devez spécifier un objet à poser.")
+            return
+        
+        item_name = list_of_words[1]  # Nom de l'objet à poser
+        
+        # Rechercher l'objet dans l'inventaire du joueur
+        item_to_drop = None
+        for item in game.player.inventory:
+            if isinstance(item, Item) and item.name.lower() == item_name.lower():  # Comparer les noms (ignorer la casse)
+                item_to_drop = item
+                break
+        
+        if item_to_drop:
+            game.player.inventory.remove(item_to_drop)  # Retirer l'objet de l'inventaire
+            current_room.inventory.append(item_to_drop)  # Ajouter l'objet à la pièce
+            print(f"Vous avez posé {item_to_drop.name} dans la pièce.")
         else:
-            print("Votre inventaire est vide")
+            print(f"L'objet {item_name} n'est pas dans votre inventaire.")
+
+
+
