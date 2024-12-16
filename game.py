@@ -34,6 +34,8 @@ class Game:
         self.commands["look"] = look
         take = Command("take", " prendre l'objet voulu", Actions.take,1)
         self.commands["take"] = take
+        drop = Command("drop", " dépose l'objet voulu", Actions.drop,1)
+        self.commands["drop"] = drop
         check = Command("check", " regarder inventaire", Actions.check,0)
         self.commands["check"] = check
                 

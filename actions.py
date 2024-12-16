@@ -16,6 +16,8 @@ MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 # The MSG1 variable is used when the command takes 1 parameter.
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
+from item import Item
+
 class Actions:
 
     def go(game, list_of_words, number_of_parameters):
@@ -203,10 +205,8 @@ class Actions:
             print("Il n'y a aucun objet ici.")
 
     def take(game, list_of_words, number_of_parameters):
-        # Récupère la pièce actuelle
         current_room = game.player.current_room
 
-        # Vérifie qu'il y a bien un deuxième mot dans la commande
         if len(list_of_words) < 2:
             print("Vous devez spécifier quel objet prendre.")
             return
@@ -222,9 +222,7 @@ class Actions:
         # Recherche l'objet dans l'inventaire de la pièce
         for item in current_room.inventory:
             if item.name == item_name:
-                # Retire l'objet de la pièce
                 current_room.inventory.remove(item)
-                # Ajoute l'objet à l'inventaire du joueur
                 game.player.inventory[item.name] = item
                 print(f"Vous avez pris {item.name}.")
                 return
@@ -232,7 +230,36 @@ class Actions:
         # Si l'objet n'est pas trouvé
         print(f"L'objet '{item_name}' n'est pas présent dans cette pièce.")
 
-        
+
+    def drop(game, list_of_words, number_of_parameters):
+            current_room = game.player.current_room
+            player = game.player
+
+            if len(list_of_words) < 2:
+                print("Vous devez spécifier quel objet vous voulez déposer.")
+                return
+
+            item_name = list_of_words[1]
+
+            # Vérifie si l'inventaire du joueur est vide
+            if not player.inventory:
+                print("Vous n'avez pas d'objets à déposer.")
+                return
+
+            # Recherche l'objet dans l'inventaire
+            print(player.inventory)
+            for item_string, item_value in player.inventory.items():
+
+                if item_string == item_name:
+                    game.player.inventory.remove(item)
+                    current_room.inventory[item.name] = item
+                    print(f"Vous avez déposé(e) {item.name}.")
+                    return
+                    
+            # Si l'objet n'est pas trouvé
+            print(f"Vous ne disposez pas de l'objet : '{item_name}'.") 
+
+
 
     def check(game, list_of_words, number_of_parameters):
         player = game.player
