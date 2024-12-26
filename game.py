@@ -9,7 +9,7 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
-
+from Character import Character
 
 class Game:
 
@@ -100,13 +100,14 @@ class Game:
         reserve.exits = {"N" : hall3, "E" : None, "S" : None, "O": None,"U" : None, "D" : None}
         # Setup player and starting room
 
-
+        #Spawn
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = sas_de_decompression
        
-       
+        #Items
         hall2.inventory = {Item("eau", "a boire", 1)}
-
+        #PNJ
+        gandalf = Character("Gandalf", "un magicien blanc", hall2, ["Abracadabra !"])
 
     # Play the game
     def play(self):
