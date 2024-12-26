@@ -74,7 +74,10 @@ class Room:
        
         inventory_str = f"La salle '{self.name}' contient les items suivants :\n"
         for name, item in self.inventory.items():
-            inventory_str += f"    - {name} : {item.description} ({item.weight} kg)\n"
-        return inventory_str
+            for name, character in self.character():
+                character_str += f"    - {name} : {character.description} {character.description} {character.current_room} {character.msg}\n"
+                inventory_str += f"    - {name} : {item.description} ({item.weight} kg)\n"
+        return inventory_str,character_str
+        
         
 

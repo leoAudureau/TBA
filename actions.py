@@ -236,7 +236,9 @@ class Actions:
         if current_room.inventory:
             print("Les objets présents dans cette pièce sont :")
             for item in current_room.inventory:
-                print(f"    - {item.name} : {item.description} ({item.weight} kg)")
+                for character in current_room.character:
+                    print(f"    - {character.name} : {character.description} {self.current_room} {self.msg} ")
+                    print(f"    - {item.name} : {item.description} ({item.weight} kg)")
         else:
             print("Il n'y a aucun objet ici.")
 

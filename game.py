@@ -47,13 +47,13 @@ class Game:
         # Setup rooms
 
 
-        sas_de_decompression= Room("Sas de décompression", "arrivés dans la station ... , vous êtes dans le sas de décompression")
+        sas_de_decompression= Room("Sas de décompression", "arrivés dans la station spatiale intercontinantale oû les meilleurs astronautes de chaque continent cohabitent, vous êtes dans le sas de décompression")
         self.rooms.append(sas_de_decompression)
        
-        hall1= Room("hall1", " le Hall 1, ce hall vous permettra d'entrer dans des salles importantes du vaisseau")
+        hall1= Room("hall1", " le Hall 1, ce hall vous permettra d'entrer dans des salles importantes du vaisseau, du commandemement au voyage extravéhiculaire")
         self.rooms.append(hall1)
        
-        hall2=Room("hall2","le Hall 2, ce Haull vous permettra d'acceder au savoir...")
+        hall2=Room("hall2","le Hall 2, ce Haull vous permettra d'acceder à différentes pièces vitales du vaisseau vous permettant d'expérimenter ce que bon vous semble")
         self.rooms.append(hall2)
        
         hall3=Room("hall3","le Hall 3, à vous la nourriture, c'est assez important dans l'espace...")
@@ -62,23 +62,22 @@ class Game:
         salle_commune=Room("salle_commune"," la salle commune du vaisseau, tout le monde s'y restaure et prend du bon temps ")
         self.rooms.append(salle_commune)
        
-        module_amarage=Room("module d'amarage","le module d'amarage, ici vous pouvez acceuilir des amis ou avoir la surprise de tomber sur des pirates de l'espaces")
+        module_amarage=Room("module d'amarage","le module d'amarage, ici vous pouvez acceuilir des amis ou avoir la surprise de tomber sur des pirates de l'espace")
         self.rooms.append(module_amarage)
        
-        poste_de_commandes= Room("poste de commande","le poste de commande, à vous le voyage intergalactique !")
+        poste_de_commandes= Room("poste de commande","le poste de commande, à vous le voyage intergalactique ! C'est aussi ici que tout les sytèmes dans le vaisseau sont gérés")
         self.rooms.append(poste_de_commandes)
        
         reserve=Room("reserve", "la réserve du vaisseau, c'est ici qu'on entrepose la nourriture")
         self.rooms.append(reserve)
        
-        labo2=Room("labo2","le deuxième laboratoire celui de ... , ")
+        labo2=Room("labo2","le deuxième laboratoire, celui de ... , ")
         self.rooms.append(labo2)
        
         labo1=Room("labo1", "le premier laboratoire du vaisseau")
         self.rooms.append(labo1)
 
-
-        serre = Room("serre", "la serre")
+        serre = Room("serre", "ici vous pouvez faire pousser à peut près tout ce que vous voulez")
         self.rooms.append(serre)
 
 
@@ -114,7 +113,8 @@ class Game:
         labo2.inventory = {Item("fiole", "contient un liquide violet qui semble suspect", 0.5)}
         salle_commune.inventory = {Item("jeu de cartes", "pour s'amuser entre collègues", 1)}
         #PNJ
-        gandalf = Character("Gandalf", "un magicien blanc", hall2, ["Abracadabra !"])
+        Bruno = Character("Bruno", "un chimiste de l'espace qui n'aime pas trop son voisin du dessus", labo1, ["Abracadabra !"])
+        Fredo = Character("Fredo", "un autre chimste de l'espace qui n'aime pas son voisin du dessous", labo2, ["ATTENTION EN BAS CA VA CHAUFFER !"])
 
     # Play the game
     def play(self):
