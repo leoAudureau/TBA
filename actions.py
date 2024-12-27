@@ -228,19 +228,30 @@ class Actions:
         return True
 
 
-    def look (game,list_of_words, number_of_parameters):
+    def look(game, list_of_words, number_of_parameters):
+        
         current_room = game.player.current_room
+        print(current_room.character)
         print(current_room.get_long_description())
 
-
+        # Affichage des items présents dans la pièce
         if current_room.inventory:
             print("Les objets présents dans cette pièce sont :")
-            for item in current_room.inventory:
-                for character in current_room.character:
-                    print(f"    - {character.name} : {character.description} {self.current_room} {self.msg} ")
-                    print(f"    - {item.name} : {item.description} ({item.weight} kg)")
+            for item in current_room.inventory.values():
+                print(f"    - {item.name} : {item.description} ({item.weight} kg)")
         else:
             print("Il n'y a aucun objet ici.")
+
+        # Affichage des personnages présents dans la pièce
+        if current_room.character:
+            print("Les personnages présents dans cette pièce sont :")
+            for character in current_room.character.values():
+                print(f"    - {character}")
+        else:
+            print("Il n'y a aucun personnage ici.")
+
+
+
 
 
     def take(game, list_of_words, number_of_parameters):

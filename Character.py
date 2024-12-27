@@ -2,11 +2,11 @@ class Character():
      # Define the constructor.
     def __init__(self, name,current_room,description,msg):
         self.name = name
-        self.current_room = None
+        self.current_room = current_room
         self.description= description
-        self.msg= []
+        self.msg= msg
     
     def __str__(self):
-        return f"{self.name} : {self.description} {self.current_room} {self.msg}"
+        return f"{self.name} : {self.description}"
 
 

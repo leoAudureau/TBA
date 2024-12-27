@@ -115,6 +115,9 @@ class Game:
         #PNJ
         Bruno = Character("Bruno", "un chimiste de l'espace qui n'aime pas trop son voisin du dessus", labo1, ["Abracadabra !"])
         Fredo = Character("Fredo", "un autre chimste de l'espace qui n'aime pas son voisin du dessous", labo2, ["ATTENTION EN BAS CA VA CHAUFFER !"])
+        
+        labo1.character["Bruno"] = Bruno
+        labo2.character["Fredo"] = Fredo
 
     # Play the game
     def play(self):
