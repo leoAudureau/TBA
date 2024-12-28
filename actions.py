@@ -229,26 +229,12 @@ class Actions:
 
 
     def look(game, list_of_words, number_of_parameters):
-        
         current_room = game.player.current_room
-        print(current_room.character)
-        print(current_room.get_long_description())
+        print(current_room.get_long_description())  # Affiche la description longue de la pièce
+        print(current_room.get_inventory())  # Affiche les items et les PNJ
+            
 
-        # Affichage des items présents dans la pièce
-        if current_room.inventory:
-            print("Les objets présents dans cette pièce sont :")
-            for item in current_room.inventory.values():
-                print(f"    - {item.name} : {item.description} ({item.weight} kg)")
-        else:
-            print("Il n'y a aucun objet ici.")
 
-        # Affichage des personnages présents dans la pièce
-        if current_room.character:
-            print("Les personnages présents dans cette pièce sont :")
-            for character in current_room.character.values():
-                print(f"    - {character}")
-        else:
-            print("Il n'y a aucun personnage ici.")
 
 
 
@@ -275,11 +261,10 @@ class Actions:
 
         # Recherche l'objet dans l'inventaire de la pièce
         for item in current_room.inventory:
-            if item.name == item_name:
-                current_room.inventory.remove(item)
-                game.player.inventory[item.name] = item
-                print(f"Vous avez pris {item.name}.")
-                return
+            current_room.inventory.pop(item)
+            game.player.inventory[item.name] = item
+            print(f"Vous avez pris {item.name}.")
+            return
 
 
         # Si l'objet n'est pas trouvé

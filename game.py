@@ -104,20 +104,23 @@ class Game:
         self.player.current_room = sas_de_decompression
        
         #Items
-        hall2.inventory = {Item("eau", "a boire", 1)}
-        poste_de_commandes.inventory = {Item("eau", "a boire", 1)}
-        serre.inventory = {Item("salade", "bien verte", 0.1)}
-        module_amarage.inventory = {Item("combinaison spatiale", "vous permet de sortir du véhicule", 30)}
-        #FAIRE UN SCENARIO DE DEFAITE : LORSQUE L'ON PREND LA COMBINAISON,ON DEMANDE SI ON VEUT LA METTRE (oui ou non) et 
-        #si elle est mise on demande si l'on veut sortir du vaisseau, si oui c'est fin de partie et la team rocket s'en va vers d'autres cieux
-        labo2.inventory = {Item("fiole", "contient un liquide violet qui semble suspect", 0.5)}
-        salle_commune.inventory = {Item("jeu de cartes", "pour s'amuser entre collègues", 1)}
+
+        hall2.inventory = {"eau": Item("eau", "à boire", 1)}
+        poste_de_commandes.inventory = {"eau": Item("eau", "à boire", 1)}
+        serre.inventory = {"salade": Item("salade", "bien verte", 0.1)}
+        module_amarage.inventory = {"combinaison spatiale": Item("combinaison spatiale", "vous permet de sortir du véhicule", 30)}
+        labo2.inventory = {"fiole": Item("fiole", "contient un liquide violet qui semble suspect", 0.5)}
+        salle_commune.inventory = {"jeu de cartes": Item("jeu de cartes", "pour s'amuser entre collègues", 1)}
+
+
         #PNJ
-        Bruno = Character("Bruno", "un chimiste de l'espace qui n'aime pas trop son voisin du dessus", labo1, ["Abracadabra !"])
-        Fredo = Character("Fredo", "un autre chimste de l'espace qui n'aime pas son voisin du dessous", labo2, ["ATTENTION EN BAS CA VA CHAUFFER !"])
         
-        labo1.character["Bruno"] = Bruno
-        labo2.character["Fredo"] = Fredo
+        bruno = Character("Bruno", "un chimiste de l'espace qui n'aime pas trop son voisin du dessus", ["Bonjour !"])
+        fredo = Character("Fredo", "un autre chimiste de l'espace qui n'aime pas son voisin du dessous", ["Attention en bas ça va chauffer !"])
+
+        labo1.character[bruno.name] = bruno
+        labo2.character[fredo.name] = fredo
+
 
     # Play the game
     def play(self):

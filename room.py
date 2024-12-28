@@ -68,28 +68,23 @@ class Room:
     def get_inventory(self):
         """
         Retourne une chaîne de caractères décrivant le contenu de la pièce,
-        y compris les items et les personnages non joueurs présents.
+        incluant les items et les personnages non joueurs.
         """
-        result = f"La salle '{self.name}' contient :\n"
+        inventory_str = ""
 
-        # Ajouter les items à l'inventaire
-        if not self.inventory:
-            result += "    Aucun item.\n"
-        else:
-            result += "    Items :\n"
-            for name, item in self.inventory.items():
-                result += f"        - {name} : {item.description} ({item.weight} kg)\n"
+        # Ajouter les items présents dans la pièce
+        if self.inventory:
+            inventory_str += "Les objets présents dans cette pièce sont :\n"
+            for item in self.inventory.values():  # Utilisation de .values() pour parcourir les items
+                inventory_str += f"    - {item.name} : {item.description} ({item.weight} kg)\n"
 
-        # Ajouter les personnages à l'affichage
-        if not self.characters:
-            result += "    Aucun personnage.\n"
-        else:
-            result += "    Personnages :\n"
-            for name, character in self.characters.items():
-                result += f"        - {name} : {character.description}\n"
+        # Ajouter les personnages présents dans la pièce
+        if self.character:
+            inventory_str += "Les personnages présents dans cette pièce sont :\n"
+            for character in self.character.values():  # Utilisation de .values() pour parcourir les PNJ
+                inventory_str += f"    - {character.name} : {character.description}\n"
 
-        return result
-
-        
+        # Retourne une description ou indique que la pièce est vide
+        return inventory_str or "Cette pièce est vide."
         
 
