@@ -261,10 +261,11 @@ class Actions:
 
         # Recherche l'objet dans l'inventaire de la pièce
         for item in current_room.inventory:
-            current_room.inventory.pop(item)
-            game.player.inventory[item.name] = item
-            print(f"Vous avez pris {item.name}.")
-            return
+            if item.name==item_name:
+                current_room.inventory.remove(item)
+                game.player.inventory[item.name] = item
+                print(f"Vous avez pris {item.name}.")
+                return
 
 
         # Si l'objet n'est pas trouvé
