@@ -304,3 +304,25 @@ class Actions:
                     print(f"    - {item.name} : {item.description} ({item.weight} kg)")
         else:
             print("Votre inventaire est vide")
+
+
+    def talk(game, list_of_words, number_of_parameters):
+        current_room = game.player.current_room
+
+        if len(list_of_words) < 2:
+            print("Vous devez spécifier avec qui parler.")
+            return
+
+        # Récupère le nom du personnage spécifié par l'utilisateur
+        character_name = list_of_words[1].lower()  # Convertir en minuscule
+
+        # Recherche du personnage dans le dictionnaire
+        character = current_room.character.get(character_name)
+        if not character:
+            print(f"{character_name.capitalize()} n'est pas ici.")
+            return
+
+        # Affiche le message du personnage
+        print(character.get_msg())
+
+

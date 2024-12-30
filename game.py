@@ -43,7 +43,8 @@ class Game:
         self.commands["drop"] = drop
         check = Command("check", " regarder inventaire", Actions.check,0)
         self.commands["check"] = check
-       
+        talk= Command("talk","parler avec un pnj", Actions.talk,1)
+        self.commands["talk"] = talk
         # Setup rooms
 
 
@@ -118,9 +119,12 @@ class Game:
         bruno = Character("Bruno", "un chimiste de l'espace qui n'aime pas trop son voisin du dessus", ["Bonjour !"])
         fredo = Character("Fredo", "un autre chimiste de l'espace qui n'aime pas son voisin du dessous", ["Attention en bas ça va chauffer !"])
 
-        labo1.character[bruno.name] = bruno
-        labo2.character[fredo.name] = fredo
+        # Ajouter les personnages aux salles avec des clés en minuscules
+        labo1.character[bruno.name.lower()] = bruno
+        labo2.character[fredo.name.lower()] = fredo
 
+        
+        
 
     # Play the game
     def play(self):
