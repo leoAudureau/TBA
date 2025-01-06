@@ -51,5 +51,10 @@ class Command:
    
 
 
-
-
+    def win(self, player, number_of_parameters, action):
+        if action == "talk" :
+            if character.name == "eduardo" :
+                if "combinaison" in game.player.inventory() :
+                    print("Eduardo : Parfait, donne moi cette barre chocolaté et je te ramène. Fin du jeu !")
+                    return True
+        return False

@@ -109,7 +109,7 @@ class Game:
         hall2.inventory = {"eau": Item("eau", "à boire", 1)}
         poste_de_commandes.inventory = {"eau": Item("eau", "à boire", 1)}
         serre.inventory = {"salade": Item("salade", "bien verte", 0.1)}
-        module_amarage.inventory = {"combinaison spatiale": Item("combinaison spatiale", "vous permet de sortir du véhicule", 30)}
+        module_amarage.inventory = {"combinaison": Item("combinaison", "vous permet de sortir du véhicule", 30)}
         labo2.inventory = {"fiole": Item("fiole", "contient un liquide violet qui semble suspect", 0.5)}
         salle_commune.inventory = {"jeu de cartes": Item("jeu de cartes", "pour s'amuser entre collègues", 1)}
         reserve.inventory = {"barre chocolaté": Item("barre chocolaté", "à manger", 0.1)}
@@ -121,7 +121,7 @@ class Game:
         fredo = Character("Fredo", "un autre chimiste de l'espace qui n'aime pas son voisin du dessous", ["Attention en bas ça va chauffer !"])
         eduardo = Character("Eduardo", "un ingénieur en propulsion peu sympathique", ["Ne touche à rien ici ! On devine à ta tête que tu ne sais même pas ce que tu fais ici."])
         lolo = Character("Lolo", "un serriste très acceuillant et souriant", ["Ah, enfin quelqu'un qui vient traîner par ici ! Allez viens goûter toutes ces merveilles."])
-        elon = Character("Elon", "un homme qui, après la politique, essaye encore quelque chose qu'il ne maîtrise pas...", ["Come on man! I feel like playing cards."])
+        elon = Character("Elon", "un homme qui, après la politique, essaye encore quelque chose qu'il ne connaît pas...", ["Come on man! I feel like playing cards."])
 
 
         # Ajouter les personnages aux salles avec des clés en minuscules
@@ -170,7 +170,7 @@ class Game:
         print("Entrez 'help' si vous avez besoin d'aide.")
         #
         print(self.player.current_room.get_long_description())
-   
+
 
 
 def main():
@@ -181,3 +181,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
