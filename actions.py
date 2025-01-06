@@ -257,15 +257,7 @@ class Actions:
         else:
             # Si l'objet n'est pas trouvé
             print(f"L'objet '{item_name}' n'est pas présent dans cette pièce.")
-
-
-
-
-
-
    
-   
-
 
 
 

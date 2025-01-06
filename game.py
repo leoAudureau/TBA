@@ -78,7 +78,7 @@ class Game:
         labo1=Room("labo1", "le premier laboratoire du vaisseau, faites attention Bruno travaille")
         self.rooms.append(labo1)
 
-        serre = Room("serre", "ici vous pouvez faire pousser à peut près tout ce que vous voulez")
+        serre = Room("serre", "la serre, ici vous pouvez faire pousser à peut près tout ce que vous voulez")
         self.rooms.append(serre)
 
 
@@ -112,17 +112,24 @@ class Game:
         module_amarage.inventory = {"combinaison spatiale": Item("combinaison spatiale", "vous permet de sortir du véhicule", 30)}
         labo2.inventory = {"fiole": Item("fiole", "contient un liquide violet qui semble suspect", 0.5)}
         salle_commune.inventory = {"jeu de cartes": Item("jeu de cartes", "pour s'amuser entre collègues", 1)}
+        reserve.inventory = {"barre chocolaté": Item("barre chocolaté", "à manger", 0.1)}
 
 
         #PNJ
         
         bruno = Character("Bruno", "un chimiste de l'espace qui n'aime pas trop son voisin du dessus", ["Bonjour !"])
         fredo = Character("Fredo", "un autre chimiste de l'espace qui n'aime pas son voisin du dessous", ["Attention en bas ça va chauffer !"])
+        eduardo = Character("Eduardo", "un ingénieur en propulsion peu sympathique", ["Ne touche à rien ici ! On devine à ta tête que tu ne sais même pas ce que tu fais ici."])
+        lolo = Character("Lolo", "un serriste très acceuillant et souriant", ["Ah, enfin quelqu'un qui vient traîner par ici ! Allez viens goûter toutes ces merveilles."])
+        elon = Character("Elon", "un homme qui, après la politique, essaye encore quelque chose qu'il ne maîtrise pas...", ["Come on man! I feel like playing cards."])
+
 
         # Ajouter les personnages aux salles avec des clés en minuscules
         labo1.character[bruno.name.lower()] = bruno
         labo2.character[fredo.name.lower()] = fredo
-
+        poste_de_commandes.character[eduardo.name.lower()] = eduardo
+        serre.character[lolo.name.lower()] = lolo
+        salle_commune.character[elon.name.lower()] = elon
         
         
 
