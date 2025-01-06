@@ -72,10 +72,10 @@ class Game:
         reserve=Room("reserve", "la réserve du vaisseau, c'est ici qu'on entrepose la nourriture")
         self.rooms.append(reserve)
        
-        labo2=Room("labo2","le deuxième laboratoire, celui de ... , ")
+        labo2=Room("labo2","le deuxième laboratoire, celui de Fredo")
         self.rooms.append(labo2)
        
-        labo1=Room("labo1", "le premier laboratoire du vaisseau")
+        labo1=Room("labo1", "le premier laboratoire du vaisseau, faites attention Bruno travaille")
         self.rooms.append(labo1)
 
         serre = Room("serre", "ici vous pouvez faire pousser à peut près tout ce que vous voulez")
