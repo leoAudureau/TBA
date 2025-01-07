@@ -111,7 +111,7 @@ class Game:
         serre.inventory = {"salade": Item("salade", "bien verte", 0.1)}
         module_amarage.inventory = {"combinaison": Item("combinaison", "vous permet de sortir du véhicule", 30)}
         labo2.inventory = {"fiole": Item("fiole", "contient un liquide violet qui semble suspect", 0.5)}
-        salle_commune.inventory = {"jeu de cartes": Item("jeu de cartes", "pour s'amuser entre collègues", 1)}
+        salle_commune.inventory = {"cartes": Item("cartes", "pour s'amuser entre collègues", 1)}
         reserve.inventory = {"bounty": Item("bounty", "à manger", 0.1)}
 
 

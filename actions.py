@@ -320,8 +320,14 @@ class Actions:
             print(f"{character_name.capitalize()} n'est pas ici.")
             return
 
+            # Condition spéciale pour Elon
+        elif character_name == "elon" and "cartes" in game.player.inventory:
+            print("\nElon : Ah enfin quelque chose d'intéressant à faire dans cette f*king station !\n")
+
+
+
         # Condition de victoire
-        if character_name == "eduardo" and "combinaison" in game.player.inventory and "bounty" in game.player.inventory:
+        elif character_name == "eduardo" and "combinaison" in game.player.inventory and "bounty" in game.player.inventory:
             print("\nEduardo : Parfait ! Donne moi cette barre chocolaté et je te ramène sur Terre.\n")
             game.finished = True
 
