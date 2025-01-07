@@ -314,7 +314,10 @@ class Actions:
             print(f"{character_name.capitalize()} n'est pas ici.")
             return
 
-        # Affiche le message du personnage
-        print(character.get_msg())
-
-
+        # Condition de victoire
+        if character_name == "eduardo" and "combinaison" in game.player.inventory and "bounty" in game.player.inventory:
+            print("\nEduardo : Parfait ! Donne moi cette barre chocolaté et je te ramène sur Terre.\n")
+            game.finished = True
+        else:
+            # Si pas de combi ou de barre chocolaté alors msg normal
+            print(character.get_msg())
