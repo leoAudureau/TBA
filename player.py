@@ -20,7 +20,7 @@ class Player():
     def can_carry(self, item):
         return self.get_total_weight() + item.weight <= self.max_weight
 
-    def move(self, direction):
+    def move(self, direction, game):
         # Récupérer la salle suivante à partir des sorties de la salle actuelle.
         next_room = self.current_room.exits.get(direction)
 
@@ -33,6 +33,11 @@ class Player():
         # Ajouter la salle actuelle à l'historique si elle n'y est pas déjà.
         if self.current_room.name not in self.history:
             self.history.append(self.current_room.name)
+
+        # Déplacer Eduardo une fois sur deux
+        for room in game.rooms:
+            if "eduardo" in room.character:
+                room.character["eduardo"].move_to_random_room(game)
 
         # Déplacer le joueur dans la salle suivante.
         self.current_room = next_room

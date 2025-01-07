@@ -73,8 +73,6 @@ class Actions:
 
         # Move the player in the direction specified by the parameter.
         d = {
-
-
             "N": "N", "nord": "N", "NORD": "N", "n": "N",
             "O": "O", "ouest": "O", "OUEST": "O", "o": "O",
             "E": "E", "est": "E", "EST": "E", "e": "E",  
@@ -83,7 +81,7 @@ class Actions:
             "D": "D", "bas": "D", "BAS": "D", "b": "D" , "down" : "D", "DOWN" : "D", "d" : "D"
         }
         if direction in d:
-            player.move(d[direction])
+            player.move(d[direction], game)
         else:
             print("vous devez renseigner une direction valide")
         return True
