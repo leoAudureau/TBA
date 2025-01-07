@@ -234,6 +234,8 @@ class Actions:
         print(current_room.get_inventory())  # Affiche les items et les PNJ
             
     
+
+
     def take(game, list_of_words, number_of_parameters):
         current_room = game.player.current_room
 
@@ -251,14 +253,18 @@ class Actions:
 
         # Recherche l'objet dans l'inventaire de la pièce
         if item_name in current_room.inventory:
-            item = current_room.inventory.pop(item_name)  # Retire l'item du dictionnaire
-            game.player.inventory[item_name] = item  # Ajoute l'item à l'inventaire du joueur
-            print(f"Vous avez pris {item.name}.")
+            item = current_room.inventory[item_name]
+
+            if game.player.can_carry(item):
+                game.player.add_item_to_inventory(item)
+                del current_room.inventory[item_name]  
+
+            else:
+                print(f"Vous ne pouvez pas porter '{item.name}' votre sac devient trop lourd pour vous...")
+
         else:
             # Si l'objet n'est pas trouvé
             print(f"L'objet '{item_name}' n'est pas présent dans cette pièce.")
-   
-
 
 
     def drop(game, list_of_words, number_of_parameters):
