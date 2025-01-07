@@ -171,7 +171,7 @@ class Actions:
             return False
        
         # Print the list of available commands.
-        print("\nVoici les commandes disponibles:")
+        print("\nVoici les commandes disponibles :")
         for command in game.commands.values():
             print("\t- " + str(command))
         print()
@@ -183,7 +183,7 @@ class Actions:
         l = len(list_of_words)
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
-            print(f"Commande '{command_word}' invalide. Utilisez la commande correctement.")
+            print(f"Commande '{command_word}' invalide. Utilisez la commande correctement. Si besoin utilisez la fonction help.")
             return False
 
 
@@ -320,18 +320,18 @@ class Actions:
 
             # Condition spéciale pour Elon
         elif character_name == "elon" and "cartes" in game.player.inventory:
-            print("\nElon : Aaah finally something intéressant thing à faire dans cette f*king station !\n")
+            print("Elon : Aaah finally something intéressant thing à faire dans cette f*king station !")
 
 
 
         # Condition de victoire
         elif character_name == "eduardo" and "combinaison" in game.player.inventory and "bounty" in game.player.inventory:
-            print("\nEduardo : Parfait ! Donne moi cette barre chocolaté et je te ramène sur Terre.\n")
+            print("Eduardo : Parfait ! Donne moi cette barre chocolaté et je te ramène sur Terre.")
             game.finished = True
 
         # Condition de défaite
         elif character_name == "bruno" and "fiole" in game.player.inventory:
-            print("\nBruno : Tu oses venir avec le produit du travail médiocre de Fredo ! Petit inconscient, voilà ta punition !\n")
+            print("Bruno : Attention ne fait pas tomber cette fiole ! \n \nVous avez fait tombre la fiole... Malheuresement le vaiseau viens d'exploser, Fredo aimait un peu trop les liquides explosifs.")
             game.finished = True
 
 
