@@ -322,7 +322,7 @@ class Actions:
 
             # Condition spéciale pour Elon
         elif character_name == "elon" and "cartes" in game.player.inventory:
-            print("\nElon : Ah enfin quelque chose d'intéressant à faire dans cette f*king station !\n")
+            print("\nElon : Aaah finally something intéressant thing à faire dans cette f*king station !\n")
 
 
 
