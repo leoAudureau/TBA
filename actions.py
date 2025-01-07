@@ -318,6 +318,13 @@ class Actions:
         if character_name == "eduardo" and "combinaison" in game.player.inventory and "bounty" in game.player.inventory:
             print("\nEduardo : Parfait ! Donne moi cette barre chocolaté et je te ramène sur Terre.\n")
             game.finished = True
+
+        # Condition de défaite
+        elif character_name == "bruno" and "fiole" in game.player.inventory:
+            print("\nBruno : Tu oses venir avec le produit du travail médiocre de Fredo ! Petit inconscient, voilà ta punition !\n")
+            game.finished = True
+
+
         else:
-            # Si pas de combi ou de barre chocolaté alors msg normal
+            # Si conditions non remplies, alors msg normal
             print(character.get_msg())
