@@ -228,7 +228,6 @@ class Actions:
 
     def look(game, list_of_words, number_of_parameters):
         current_room = game.player.current_room
-        print(current_room.get_long_description())  # Affiche la description longue de la pièce
         print(current_room.get_inventory())  # Affiche les items et les PNJ
             
     
