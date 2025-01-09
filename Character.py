@@ -26,8 +26,7 @@ class Character():
         """
         self.move_counter += 1
         if self.move_counter % 2 == 0:
-            possible_rooms = ["poste_de_commandes", "salle_commune"]
-            new_room_name = random.choice(possible_rooms)
+            new_room_name = random.choice(["poste_de_commandes", "salle_commune"])
             new_room = next((room for room in game.rooms if room.name == new_room_name), None)
             if new_room:
                 for room in game.rooms:
