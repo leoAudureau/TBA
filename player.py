@@ -1,8 +1,4 @@
-# Define the Player class.
-import os
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-
+# Define the Player class
 
 class Player():
 
@@ -24,6 +20,8 @@ class Player():
 
     def can_carry(self, item):
         return self.get_total_weight() + item.weight <= self.max_weight
+
+    
 
     def move(self, direction, game):
         # Récupérer la salle suivante à partir des sorties de la salle actuelle.
@@ -49,25 +47,6 @@ class Player():
 
         # Afficher la description complète de la nouvelle salle.
         print(self.current_room.get_long_description())
-        
-        # Afficher l'image de la nouvelle salle
-        image_path = os.path.join("/workspaces/TBA/images", f"{self.current_room.name}.png")
-        if os.path.exists(image_path):
-            try:
-                image = mpimg.imread(image_path)
-                plt.imshow(image)
-                plt.axis('off')  # Masquer les axes
-                plt.show()
-                print(f"Affichage de l'image pour la pièce : {self.current_room.name}")
-            except Exception as e:
-                print(f"Erreur lors de l'affichage de l'image : {e}")
-        else:
-            print(f"Image introuvable pour la pièce : {self.current_room.name}")
-            
-            
-        # Afficher l'historique après la mise à jour.
-        print(self.get_history())
-
         return True
 
 

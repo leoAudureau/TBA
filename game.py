@@ -1,5 +1,9 @@
 # Description: Game class
 
+import tkinter as tk
+from PIL import Image, ImageTk
+import os
+
 
 # Import modules
 
@@ -20,6 +24,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
+
    
     # Setup the game
     def setup(self):
@@ -131,7 +136,8 @@ class Game:
         serre.character[lolo.name.lower()] = lolo
         salle_commune.character[elon.name.lower()] = elon
         
-        
+
+
 
     # Play the game
     def play(self):
