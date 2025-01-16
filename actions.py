@@ -325,12 +325,12 @@ class Actions:
 
         # Condition de victoire
         elif character_name == "eduardo" and "combinaison" in game.player.inventory and "bounty" in game.player.inventory:
-            print("Eduardo : Parfait ! Donne moi cette barre chocolaté et je te ramène sur Terre.")
+            print("Eduardo : Parfait ! Donne moi cette barre chocolatée et je te ramène sur Terre.")
             game.finished = True
 
         # Condition de défaite
         elif character_name == "bruno" and "fiole" in game.player.inventory:
-            print("Bruno : Attention ne fait pas tomber cette fiole ! \n \nVous avez fait tombre la fiole... Malheuresement le vaiseau viens d'exploser, Fredo aimait un peu trop les liquides explosifs.")
+            print("Bruno : Attention ne fait pas tomber cette fiole ! \n \nVous avez fait tomber la fiole... Malheuresement le vaiseau vient d'exploser, Fredo aimait un peu trop les liquides explosifs.")
             game.finished = True
 
 
