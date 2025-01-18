@@ -7,7 +7,8 @@ from Character import Character
 
 """
 Module principal du jeu d'aventure textuel.
-Ce module configure et exécute un jeu d'exploration où le joueur interagit avec des salles, des objets, et des PNJ.
+Ce module configure et exécute un jeu d'exploration où le joueur interagit
+avec des salles, des objets, et des PNJ.
 """
 
 class Game:
@@ -96,10 +97,10 @@ class Game:
         self.rooms[5].exits = {"S": self.rooms[1]}
         self.rooms[8].exits = {"D": self.rooms[9]}
         self.rooms[3].exits = {
-            "S": self.rooms[7], "O": self.rooms[10], "U": self.rooms[1]
+            "N": self.rooms[7], "O": self.rooms[10], "U": self.rooms[1]
         }
         self.rooms[10].exits = {"E": self.rooms[3]}
-        self.rooms[7].exits = {"N": self.rooms[3]}
+        self.rooms[7].exits = {"S": self.rooms[3]}
 
     def _setup_items_and_characters(self):
         """Ajoute des objets et des personnages aux salles."""
